@@ -1,7 +1,9 @@
-# Dinamic Website template
+# Dynamic Website template
 Beta version without documentation (only internal use for testing)
 **Version 1.0** with documentation soon
 
+### Available template language
+..* Español (Spanish)
 
 ### Configuration file: <config.json>
 ```
