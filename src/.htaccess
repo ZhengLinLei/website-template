@@ -1,0 +1,66 @@
+#-----------------------------------------------------------------
+# URL path configuration (friendly url)
+#-----------------------------------------------------------------
+#URL Rewrite
+RewriteEngine on
+
+#---------Configuration-----------
+RewriteRule ^cache$ config/public/cache/cache.php [L]
+#Change the '^cache$' in the url if you want to change the path
+
+RewriteRule ^migrate$ config/public/migration/migrate.php [L]
+#Change the '^migrate$' in the url if you want to change the path
+
+#---------Backend-----------
+RewriteRule ^panel$ ?admin=panel [L]
+#Change the '^panel$' in the url if you want to change the path
+
+RewriteRule ^panel/(ecommerce|blog|comment)$ ?admin=panel&type=$1 [L]
+
+#-----------------------------------------------------------------
+# Error config (There is only the common HTTP error)
+#-----------------------------------------------------------------
+#HTTP error in one file with method GET, you can edit the option in path /error/http/error.php (enabled)
+ErrorDocument 403 /error/http/error.php?error=403&text=403
+ErrorDocument 502 /error/http/error.php?error=502&text=502
+ErrorDocument 500 /error/http/error.php?error=500&text=500
+ErrorDocument 404 /error/http/error.php?error=404&text=404
+ErrorDocument 401 /error/http/error.php?error=401&text=401
+ErrorDocument 400 /error/http/error.php?error=400&text=400
+#HTTP error in multiple files, you need to crete the files in path /error/http/ (disabled)
+#ErrorDocument 403 /error/http/403.php?error=403&text=403
+#ErrorDocument 502 /error/http/502.php?error=502&text=502
+#ErrorDocument 500 /error/http/500.php?error=500&text=500
+#ErrorDocument 404 /error/http/404.php?error=404&text=404
+#ErrorDocument 401 /error/http/401.php?error=401&text=401
+#ErrorDocument 400 /error/http/400.php?error=400&text=400
+
+#-----------------------------------------------------------------
+# Client local ache configuration
+#-----------------------------------------------------------------
+<FilesMatch "\.(js|css)$">
+    Header set Cache-Control "public, max-age=86400, must-revalidate"
+</FilesMatch>
+<FilesMatch "\.(ico|pdf|jpg|jpeg|png|gif|svg)$">
+    Header set Cache-Control "public, max-age=2628000"
+    Header unset Last-Modified
+    Header unset ETag
+    FileETag None
+    Header unset Pragma
+</FilesMatch>
+<FilesMatch "\.(otf|woff|ttf)$">
+    Header set Cache-Control "public, max-age=31536000"
+    Header unset Last-Modified
+    Header unset ETag
+    FileETag None
+    Header unset Pragma
+</FilesMatch>
+
+#-----------------------------------------------------------------
+# Security inner configuration
+#-----------------------------------------------------------------
+Options -Indexes
+<FilesMatch "\.(htaccess|htpasswd|ini|phps|log|bak|txt)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
