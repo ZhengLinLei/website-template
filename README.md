@@ -3,7 +3,7 @@ Beta version without documentation (only internal use for testing)
 **Version 1.0** with documentation soon
 
 ### Available template language
-..* Español (Spanish)
+* Español (Spanish)
 
 ### Configuration file: <config.json>
 ```
